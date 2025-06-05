@@ -1,0 +1,169 @@
+# 1. Create Student (POST /students)
+curl -Uri http://localhost:8080/students `
+    -Method POST `
+    -ContentType "application/json" `
+    -Body '{"uid":"student123","name":"John Doe","phone":"1234567890","fatherName":"Mark Doe","motherName":"Jane Doe"}'
+
+-------------------------------------------------------------------------------
+# 2. Specify the student UID to retrieve
+curl -Uri http://localhost:8080/students/student123 -Method GET
+
+-------------------------------------------------------------------------------
+# 3. Updated student details
+curl -Uri http://localhost:8080/students/student123 `
+    -Method PUT `
+    -ContentType "application/json" `
+    -Body '{
+        "uid": "student123",
+        "name": "John Smith",
+        "phone": "9876543210",
+        "fatherName": "Michael Smith",
+        "motherName": "Anna Smith"
+    }'
+-------------------------------------------------------------------------------
+# UID of the student to delete
+curl -Uri http://localhost:8080/students/student123 -Method DELETE
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+Marks
+------------------------------------------------------
+1. Create Marks (POST /marks)
+curl -Uri http://localhost:8080/marks `
+    -Method POST `
+    -ContentType "application/json" `
+    -Body '{
+        "uid": "student123",
+        "sem1": {
+            "subject1": {"marks": 85, "credit": 3},
+            "subject2": {"marks": 78, "credit": 4},
+            "subject3": {"marks": 90, "credit": 3},
+            "subject4": {"marks": 88, "credit": 3},
+            "subject5": {"marks": 92, "credit": 2}
+        },
+        "sem2": {
+            "subject1": {"marks": 80, "credit": 3},
+            "subject2": {"marks": 75, "credit": 4},
+            "subject3": {"marks": 85, "credit": 3},
+            "subject4": {"marks": 82, "credit": 3},
+            "subject5": {"marks": 88, "credit": 2}
+        },
+        "sem3": {
+            "subject1": {"marks": 78, "credit": 3},
+            "subject2": {"marks": 82, "credit": 4},
+            "subject3": {"marks": 80, "credit": 3},
+            "subject4": {"marks": 85, "credit": 3},
+            "subject5": {"marks": 90, "credit": 2}
+        },
+        "sem4": {
+            "subject1": {"marks": 88, "credit": 3},
+            "subject2": {"marks": 90, "credit": 4},
+            "subject3": {"marks": 92, "credit": 3},
+            "subject4": {"marks": 85, "credit": 3},
+            "subject5": {"marks": 87, "credit": 2}
+        },
+        "sem5": {
+            "subject1": {"marks": 85, "credit": 3},
+            "subject2": {"marks": 80, "credit": 4},
+            "subject3": {"marks": 78, "credit": 3},
+            "subject4": {"marks": 82, "credit": 3},
+            "subject5": {"marks": 84, "credit": 2}
+        },
+        "sem6": {
+            "subject1": {"marks": 90, "credit": 3},
+            "subject2": {"marks": 88, "credit": 4},
+            "subject3": {"marks": 85, "credit": 3},
+            "subject4": {"marks": 87, "credit": 3},
+            "subject5": {"marks": 89, "credit": 2}
+        },
+        "sem7": {
+            "subject1": {"marks": 92, "credit": 3},
+            "subject2": {"marks": 90, "credit": 4},
+            "subject3": {"marks": 88, "credit": 3},
+            "subject4": {"marks": 85, "credit": 3},
+            "subject5": {"marks": 90, "credit": 2}
+        },
+        "sem8": {
+            "subject1": {"marks": 95, "credit": 3},
+            "subject2": {"marks": 92, "credit": 4},
+            "subject3": {"marks": 90, "credit": 3},
+            "subject4": {"marks": 88, "credit": 3},
+            "subject5": {"marks": 93, "credit": 2}
+        }
+    }'
+
+
+-------------------------------------------------------------------
+2. Get Marks (GET /marks/{uid})
+curl -Uri http://localhost:8080/marks/student123 -Method GET
+
+------------------------------------------------------------------------
+3. Update Marks (PUT /marks/{uid})
+curl -Uri http://localhost:8080/marks/student123 `
+    -Method PUT `
+    -ContentType "application/json" `
+    -Body '{
+        "uid": "student123",
+        "sem1": {
+                    "subject1": {"marks": 5, "credit": 3},
+                    "subject2": {"marks": 78, "credit": 4},
+                    "subject3": {"marks": 90, "credit": 3},
+                    "subject4": {"marks": 88, "credit": 3},
+                    "subject5": {"marks": 92, "credit": 2}
+                },
+                "sem2": {
+                    "subject1": {"marks": 80, "credit": 3},
+                    "subject2": {"marks": 75, "credit": 4},
+                    "subject3": {"marks": 85, "credit": 3},
+                    "subject4": {"marks": 82, "credit": 3},
+                    "subject5": {"marks": 88, "credit": 2}
+                },
+                "sem3": {
+                    "subject1": {"marks": 78, "credit": 3},
+                    "subject2": {"marks": 82, "credit": 4},
+                    "subject3": {"marks": 80, "credit": 3},
+                    "subject4": {"marks": 85, "credit": 3},
+                    "subject5": {"marks": 90, "credit": 2}
+                },
+                "sem4": {
+                    "subject1": {"marks": 88, "credit": 3},
+                    "subject2": {"marks": 90, "credit": 4},
+                    "subject3": {"marks": 92, "credit": 3},
+                    "subject4": {"marks": 85, "credit": 3},
+                    "subject5": {"marks": 87, "credit": 2}
+                },
+                "sem5": {
+                    "subject1": {"marks": 85, "credit": 3},
+                    "subject2": {"marks": 80, "credit": 4},
+                    "subject3": {"marks": 78, "credit": 3},
+                    "subject4": {"marks": 82, "credit": 3},
+                    "subject5": {"marks": 84, "credit": 2}
+                },
+                "sem6": {
+                    "subject1": {"marks": 90, "credit": 3},
+                    "subject2": {"marks": 88, "credit": 4},
+                    "subject3": {"marks": 85, "credit": 3},
+                    "subject4": {"marks": 87, "credit": 3},
+                    "subject5": {"marks": 89, "credit": 2}
+                },
+                "sem7": {
+                    "subject1": {"marks": 92, "credit": 3},
+                    "subject2": {"marks": 90, "credit": 4},
+                    "subject3": {"marks": 88, "credit": 3},
+                    "subject4": {"marks": 85, "credit": 3},
+                    "subject5": {"marks": 90, "credit": 2}
+                },
+                "sem8": {
+                    "subject1": {"marks": 95, "credit": 3},
+                    "subject2": {"marks": 92, "credit": 4},
+                    "subject3": {"marks": 90, "credit": 3},
+                    "subject4": {"marks": 88, "credit": 3},
+                    "subject5": {"marks": 93, "credit": 2}
+                }
+    }'
+
+
+--------------------------------------------------------------------
+4. Delete Marks (DELETE /marks/{uid})
+curl -Uri http://localhost:8080/marks/student123 -Method DELETE
+

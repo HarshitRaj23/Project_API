@@ -1,0 +1,213 @@
+ 1. Post Students
+$student = @{
+      uid = "S2006"
+      name = "John Doe"
+      phone = "1234567890"
+      fatherName = "Mr. Doe"
+      motherName = "Mrs. Doe"
+  }
+
+  $jsonStudent = $student | ConvertTo-Json -Depth 10
+
+  Invoke-RestMethod -Uri "http://127.0.0.1:8000/api/students/create/" -Method POST -Body $jsonStudent -ContentType "application/json"
+--------------------------------------------------------------------------------------
+ 2. GET All Students
+Invoke-RestMethod -Uri "http://127.0.0.1:8000/api/students/" -Method GET
+-------------------------------------------------------------------------------------
+
+ 3. GET a Specific Student by UID
+$uid = "S2005"
+Invoke-RestMethod -Uri "http://127.0.0.1:8000/api/students/$uid/" -Method GET
+-------------------------------------------------------------------------------------
+
+ 4. UPDATE a Student
+$uid = "S2005"
+$updatedStudent = @{
+    name = "John D."
+    phone = "9876543210"
+    fatherName = "Mr. D."
+    motherName = "Mrs. D."
+}
+$jsonUpdatedStudent = $updatedStudent | ConvertTo-Json -Depth 10
+
+Invoke-RestMethod -Uri "http://127.0.0.1:8000/api/students/$uid/update/" `
+                  -Method PUT `
+                  -Body $jsonUpdatedStudent `
+                  -ContentType "application/json"
+----------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------
+ 1. Post Marks of a Student
+$marks = @{
+    uid = "S2006"
+    semester = @{
+        sem1 = @{
+            "Mathematics-I"         = @{ marks = 85; credit = 4 }
+            "Physics"               = @{ marks = 78; credit = 3 }
+            "Basic Electrical Engg"= @{ marks = 90; credit = 3 }
+            "Programming in C"      = @{ marks = 88; credit = 2 }
+            "English Communication" = @{ marks = 75; credit = 3 }
+        }
+        sem2 = @{
+            "Mathematics-II"         = @{ marks = 82; credit = 4 }
+            "Chemistry"              = @{ marks = 76; credit = 3 }
+            "Data Structures"        = @{ marks = 87; credit = 3 }
+            "Digital Logic Design"   = @{ marks = 80; credit = 2 }
+            "Environmental Studies"  = @{ marks = 74; credit = 2 }
+        }
+        sem3 = @{
+            "Mathematics-III"         = @{ marks = 79; credit = 4 }
+            "Computer Organization"   = @{ marks = 75; credit = 3 }
+            "Object Oriented Prog"    = @{ marks = 88; credit = 3 }
+            "Operating Systems"       = @{ marks = 83; credit = 3 }
+            "Discrete Mathematics"    = @{ marks = 77; credit = 3 }
+        }
+        sem4 = @{
+            "Theory of Computation"     = @{ marks = 81; credit = 4 }
+            "Database Management Sys"   = @{ marks = 85; credit = 3 }
+            "Microprocessors"           = @{ marks = 79; credit = 3 }
+            "Design & Analysis of Algo" = @{ marks = 84; credit = 3 }
+            "Computer Networks"         = @{ marks = 80; credit = 3 }
+        }
+        sem5 = @{
+            "Compiler Design"           = @{ marks = 78; credit = 4 }
+            "Software Engineering"      = @{ marks = 82; credit = 3 }
+            "Web Technologies"          = @{ marks = 87; credit = 3 }
+            "Machine Learning"          = @{ marks = 85; credit = 3 }
+            "Professional Ethics"       = @{ marks = 76; credit = 2 }
+        }
+        sem6 = @{
+            "Artificial Intelligence"     = @{ marks = 86; credit = 4 }
+            "Cloud Computing"            = @{ marks = 83; credit = 3 }
+            "Internet of Things"         = @{ marks = 80; credit = 3 }
+            "Big Data Analytics"         = @{ marks = 82; credit = 3 }
+            "Open Elective - Economics"  = @{ marks = 75; credit = 2 }
+        }
+        sem7 = @{
+            "Mobile Application Dev"    = @{ marks = 84; credit = 3 }
+            "Cyber Security"            = @{ marks = 79; credit = 3 }
+            "Block Chain Tech"          = @{ marks = 78; credit = 3 }
+            "Seminar"                   = @{ marks = 90; credit = 2 }
+            "Project Phase I"           = @{ marks = 85; credit = 3 }
+        }
+        sem8 = @{
+            "Major Project"          = @{ marks = 92; credit = 6 }
+            "Internship"             = @{ marks = 89; credit = 3 }
+            "Technical Writing"      = @{ marks = 80; credit = 2 }
+        }
+    }
+}
+
+# Convert to JSON with proper depth to handle nesting
+$jsonBody = $marks | ConvertTo-Json -Depth 10
+
+# Send POST request
+Invoke-RestMethod -Uri "http://127.0.0.1:8000/api/marks/create/" `
+                  -Method POST `
+                  -Body $jsonBody `
+                  -ContentType "application/json"
+------------------------------------------------------------------------------------------
+ 2. GET Marks of a Student
+$uid = "S009"
+Invoke-RestMethod -Uri "http://127.0.0.1:8000/api/marks/$uid/" -Method GET
+------------------------------------------------------------------------------------------
+
+
+ 3. UPDATE Marks of a Student
+$uid = "S009"
+ $updatedMarks = @{
+     semester = @{
+         sem1 = @{
+             subject1 = @{ marks = 88; credit = 4 }
+             subject2 = @{ marks = 82; credit = 3 }
+             subject3 = @{ marks = 91; credit = 3 }
+             subject4 = @{ marks = 85; credit = 2 }
+             subject5 = @{ marks = 80; credit = 3 }
+         }
+         sem2 = $null
+         sem3 = $null
+         sem4 = $null
+         sem5 = $null
+         sem6 = $null
+         sem7 = $null
+         sem8 = $null
+     }
+ }
+ $jsonUpdatedMarks = $updatedMarks | ConvertTo-Json -Depth 10
+
+ Invoke-RestMethod -Uri "http://127.0.0.1:8000/api/marks/$uid/update/" `
+                   -Method PUT `
+                   -Body $jsonUpdatedMarks `
+                   -ContentType "application/json"
+
+.......................................................
+$uid = "S009"
+ $updatedMarks = @{
+     semester = @{
+         sem1 = @{
+            "Mathematics-I"         = @{ marks = 85; credit = 4 }
+            "Physics"               = @{ marks = 78; credit = 3 }
+            "Basic Electrical Engg"= @{ marks = 90; credit = 3 }
+            "Programming in C"      = @{ marks = 88; credit = 2 }
+            "English Communication" = @{ marks = 75; credit = 3 }
+        }
+        sem2 = @{
+            "Mathematics-II"         = @{ marks = 82; credit = 4 }
+            "Chemistry"              = @{ marks = 76; credit = 3 }
+            "Data Structures"        = @{ marks = 87; credit = 3 }
+            "Digital Logic Design"   = @{ marks = 80; credit = 2 }
+            "Environmental Studies"  = @{ marks = 74; credit = 2 }
+        }
+        sem3 = @{
+            "Mathematics-III"         = @{ marks = 79; credit = 4 }
+            "Computer Organization"   = @{ marks = 75; credit = 3 }
+            "Object Oriented Prog"    = @{ marks = 88; credit = 3 }
+            "Operating Systems"       = @{ marks = 83; credit = 3 }
+            "Discrete Mathematics"    = @{ marks = 77; credit = 3 }
+        }
+        sem4 = @{
+            "Theory of Computation"     = @{ marks = 81; credit = 4 }
+            "Database Management Sys"   = @{ marks = 85; credit = 3 }
+            "Microprocessors"           = @{ marks = 79; credit = 3 }
+            "Design & Analysis of Algo" = @{ marks = 84; credit = 3 }
+            "Computer Networks"         = @{ marks = 80; credit = 3 }
+        }
+        sem5 = @{
+            "Compiler Design"           = @{ marks = 78; credit = 4 }
+            "Software Engineering"      = @{ marks = 82; credit = 3 }
+            "Web Technologies"          = @{ marks = 87; credit = 3 }
+            "Machine Learning"          = @{ marks = 85; credit = 3 }
+            "Professional Ethics"       = @{ marks = 76; credit = 2 }
+        }
+        sem6 = @{
+            "Artificial Intelligence"     = @{ marks = 86; credit = 4 }
+            "Cloud Computing"            = @{ marks = 83; credit = 3 }
+            "Internet of Things"         = @{ marks = 80; credit = 3 }
+            "Big Data Analytics"         = @{ marks = 82; credit = 3 }
+            "Open Elective - Economics"  = @{ marks = 75; credit = 2 }
+        }
+        sem7 = @{
+            "Mobile Application Dev"    = @{ marks = 84; credit = 3 }
+            "Cyber Security"            = @{ marks = 79; credit = 3 }
+            "Block Chain Tech"          = @{ marks = 78; credit = 3 }
+            "Seminar"                   = @{ marks = 90; credit = 2 }
+            "Project Phase I"           = @{ marks = 85; credit = 3 }
+        }
+        sem8 = @{
+            "Major Project"          = @{ marks = 92; credit = 6 }
+            "Internship"             = @{ marks = 89; credit = 3 }
+            "Technical Writing"      = @{ marks = 80; credit = 2 }
+        }
+     }
+ }
+ $jsonUpdatedMarks = $updatedMarks | ConvertTo-Json -Depth 10
+
+ Invoke-RestMethod -Uri "http://127.0.0.1:8000/api/marks/$uid/update/" `
+                   -Method PUT `
+                   -Body $jsonUpdatedMarks `
+                   -ContentType "application/json"
+-----------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------
+ 1. GET CGPA of a Student
+$uid = "S009"
+Invoke-RestMethod -Uri "http://127.0.0.1:8000/api/cgpa/$uid/" -Method GET
+------------------------------------------------------------------------------------------------
