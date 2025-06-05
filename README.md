@@ -12,6 +12,5 @@
 ---
 
 ## 🗂️ ER Diagram
-
-[text](../../Downloads)
+![ER Diagram](./er-diagram.png)
 
