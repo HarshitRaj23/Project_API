@@ -74,22 +74,4 @@ public class MarksController {
         Marks saved = marksRepo.save(updatedMarks);
         return ResponseEntity.ok(saved);
     }
-
-    @DeleteMapping("/{uid}")
-    public ResponseEntity<?> deleteMarks(@PathVariable String uid) {
-        Student student = studentRepo.findByUid(uid);
-        if (student == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("Error: Student with UID " + uid + " does not exist.");
-        }
-
-        Marks marks = marksRepo.findByUid(uid);
-        if (marks == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("Error: No marks found for UID " + uid);
-        }
-
-        marksRepo.delete(marks);
-        return ResponseEntity.ok("Deleted marks for UID " + uid);
-    }
 }
