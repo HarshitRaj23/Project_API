@@ -14,7 +14,7 @@ const subjectMarksSchema = new mongoose.Schema({
 });
 
 const marksSchema = new mongoose.Schema({
-  uid: { type: String, required: true }, // uid as string here too
+  uid: { type: String, required: true },
   semester: {
     sem1: subjectMarksSchema,
     sem2: subjectMarksSchema,
