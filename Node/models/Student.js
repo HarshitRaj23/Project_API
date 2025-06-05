@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 // Student model
 const studentSchema = new mongoose.Schema({
-  uid: { type: String, required: true, unique: true },  // make uid unique here
+  uid: { type: String, required: true, unique: true }, 
   name: { type: String, required: true },
   phone: String,
   fatherName: String,
