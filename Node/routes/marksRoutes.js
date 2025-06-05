@@ -8,19 +8,16 @@ router.post("/", async (req, res) => {
   try {
     const { uid } = req.body;
 
-    // Check if student exists
     const studentExists = await Student.exists({ uid });
     if (!studentExists) {
       return res.status(400).json({ error: "No student with this uid exists" });
     }
 
-    // Optionally check if marks already exist for this uid (to avoid duplicates)
     const marksExists = await Marks.exists({ uid });
     if (marksExists) {
       return res.status(400).json({ error: "Marks for this uid already exist" });
     }
 
-    // Create marks
     const marks = new Marks(req.body);
     await marks.save();
 
