@@ -12,5 +12,6 @@
 ---
 
 ## 🗂️ ER Diagram
-![ER Diagram](./er-diagram.png)
+
+![ER Diagram](./ERD.png)
 
