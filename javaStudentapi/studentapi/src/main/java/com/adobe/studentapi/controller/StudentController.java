@@ -47,14 +47,4 @@ public class StudentController {
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Student not found.");
     }
-
-    @DeleteMapping("/{uid}")
-    public ResponseEntity<String> deleteStudent(@PathVariable String uid) {
-        Student student = studentRepo.findByUid(uid);
-        if (student != null) {
-            studentRepo.delete(student);
-            return ResponseEntity.ok("Deleted");
-        }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Not Found");
-    }
 }
